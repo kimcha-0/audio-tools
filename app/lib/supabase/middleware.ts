@@ -3,8 +3,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 export const updateSession = async (request: NextRequest) => {
     let supabaseResponse = NextResponse.next({
-        request,
-    });
+        request, });
 
     const supabase = createServerClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
