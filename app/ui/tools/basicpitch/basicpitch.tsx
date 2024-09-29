@@ -1,5 +1,5 @@
 export default async function BasicPitchButton() {
     return (
-        <button action={}>Get MIDI</button>
-    )
+        <div>BasicPitchButton</div>
+    );
 }
