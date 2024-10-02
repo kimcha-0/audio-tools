@@ -1,12 +1,37 @@
+'use-client'
 import Link from 'next/link';
+import { createClient } from '@/app/lib/supabase/client';
+import { signout } from '@/app/lib/actions';
 
 export default function TopNav() {
-    return (
-        <div className="flex justify-center">
-            <Link href="/">Home</Link>
-            <Link href="/login">Login</Link>
-            <Link href="/account">Account</Link>
-        </div>
-    );
-}
+    const supabase = createClient();
+    const { data, error } = supabase.auth.getUser();
+    if (error || !data?.user) {
+        return (
+            <div className="flex flex-row">
+                <div className="basis-3/4">
+                    <Link href="/">Home</Link>
+                </div>
+                <div className="flex justify-evenly basis-1/4">
+                    <Link href="/login">Login</Link>
+                    <Link href="/account">Account</Link>
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div className="flex flex-row">
+                <div className="basis-3/4">
+                    <Link href="/">Home</Link>
+                </div>
+                <div className="flex justify-evenly basis-1/4">
+                    <button formAction={signout}>Logout</button>
+                    <Link href="/account">Account</Link>
+                </div>
+            </div>
+        )
 
+    }
+
+    
+}
