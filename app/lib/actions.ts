@@ -22,7 +22,7 @@ export async function login(formData: FormData) {
         redirect('/error')
     }
 
-    revalidatePath('/login', 'layout')
+    revalidatePath('/', 'layout')
     redirect('/tools')
 }
 

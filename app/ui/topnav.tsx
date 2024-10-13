@@ -1,12 +1,17 @@
-'use-client'
+'use client'
+
 import Link from 'next/link';
 import { createClient } from '@/app/lib/supabase/client';
 import { signout } from '@/app/lib/actions';
+import { useEffect } from 'react';
 
-export default function TopNav() {
+export const TopNav = async () => {
     const supabase = createClient();
-    const user = supabase.auth.getUser();
-    return (
+    useEffect(async () => {
+        const { data, err } = await supabase.auth.getUser();
+    })
+    if (!data?.user || err) {
+        return (
         <div className="flex flex-row">
             <div className="basis-3/4">
                 <Link href="/">Home</Link>
@@ -16,5 +21,21 @@ export default function TopNav() {
                 <Link href="/account">Account</Link>
             </div>
         </div>
-    )
+        )
+    } else {
+        return (
+        <div className="flex flex-row">
+            <div className="basis-3/4">
+                <Link href="/">Home</Link>
+                <Link href="/logout">Logout</Link>
+                <form action="/auth/signout" method="post">
+                    <button className="button block" type="submit">
+                    Sign out
+                    </button>
+                </form>
+            </div>
+        </div>
+        )
+    }
+    
 }
