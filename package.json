@@ -13,6 +13,8 @@
     "@spotify/basic-pitch": "^1.0.1",
     "@supabase/ssr": "^0.5.1",
     "@supabase/supabase-js": "^2.45.4",
+    "@tensorflow/tfjs": "^4.21.0",
+    "@tensorflow/tfjs-node": "^4.21.0",
     "@tonejs/midi": "^2.0.28",
     "audio-loader": "^1.0.3",
     "fs": "0.0.1-security",
@@ -21,13 +23,15 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/node": "^20.16.10",
+    "@types/node": "^20.16.11",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
+    "react-dom": "^18.3.1",
+    "web-audio-api": "^0.2.2",
     "eslint": "^8.57.1",
     "eslint-config-next": "14.2.13",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.3"
   }
 }

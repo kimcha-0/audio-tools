@@ -1,9 +1,9 @@
-'use-client';
+import Link from 'next/link';
 
 export default function SideNav() {
     return (
         <div>
-        SideNav
+            <Link href="/tools/basicpitch">Basic Pitch</Link>
         </div>
     );
 }

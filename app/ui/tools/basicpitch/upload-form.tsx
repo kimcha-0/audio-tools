@@ -1,10 +1,7 @@
-import runBasicPitch from '@/app/tools/basicpitch/actions';
-
-const UploadButton = () => {
+export const UploadButton = () => {
     return (
-        <form action={runBasicPitch}>
-            <input></input>
-        </form>
+        <div>
+        </div>
     );
 
 }

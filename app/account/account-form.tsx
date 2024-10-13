@@ -1,11 +1,13 @@
 'use client'
 import { useCallback, useEffect, useState } from 'react'
 import { createClient } from '@/app/lib/supabase/client'
-import { type User } from '@supabase/supabase-js'
+import { useRouter } from 'next/navigation';
+import { User } from '@supabase/supabase-js';
 
 
 export default function AccountForm({ user }: { user: User | null }) {
     const supabase = createClient()
+    const router = useRouter();
     const [loading, setLoading] = useState(true)
     const [fullname, setFullname] = useState<string | null>(null)
     const [username, setUsername] = useState<string | null>(null)
@@ -22,12 +24,12 @@ export default function AccountForm({ user }: { user: User | null }) {
             .select(`full_name, username, website, avatar_url`)
             .eq('id', user?.id)
             .single()
-
+            console.log('fetching user data');
             if (error && status !== 406) {
                 console.log(error)
                 throw error
             }
-            console.log('fetching user data');
+            console.log(`data: ${data}, status: ${status}`);
 
             if (data) {
                 setFullname(data.full_name)
@@ -36,6 +38,7 @@ export default function AccountForm({ user }: { user: User | null }) {
                 setAvatarUrl(data.avatar_url)
             }
         } catch (error) {
+            router.push('/login');
             alert(`Error loading user data: ${error}`);
         } finally {
             setLoading(false)
