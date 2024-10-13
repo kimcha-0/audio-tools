@@ -6,10 +6,6 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/app/lib/supabase/server'
 
 export async function login(formData: FormData) {
-<<<<<<< HEAD
-    // server component client object
-=======
->>>>>>> 15e684e (finished email/pw auth and going to work on site layout)
     const supabase = createClient();
 
     // type-casting here for convenience
