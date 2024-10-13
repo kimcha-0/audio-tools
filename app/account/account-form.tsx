@@ -12,6 +12,7 @@ export default function AccountForm({ user }: { user: User | null }) {
     const [website, setWebsite] = useState<string | null>(null)
     const [avatar_url, setAvatarUrl] = useState<string | null>(null)
 
+    // useCallback caches fn in between renders
     const getProfile = useCallback(async () => {
         try {
             setLoading(true)
@@ -26,6 +27,7 @@ export default function AccountForm({ user }: { user: User | null }) {
                 console.log(error)
                 throw error
             }
+            console.log('fetching user data');
 
             if (data) {
                 setFullname(data.full_name)
@@ -38,13 +40,13 @@ export default function AccountForm({ user }: { user: User | null }) {
         } finally {
             setLoading(false)
         }
-    }, [user, supabase])
+    }, [user, supabase]);
 
     useEffect(() => {
         getProfile()
     }, [user, getProfile])
 
-    async function updateProfile({
+    const updateProfile = async ({
         username,
         website,
         avatar_url,
@@ -53,11 +55,11 @@ export default function AccountForm({ user }: { user: User | null }) {
         fullname: string | null
         website: string | null
         avatar_url: string | null
-    }) {
+    }) => {
         try {
             setLoading(true)
 
-            const { error } = await supabase.from('profiles').upsert({
+            const { error, data, status } = await supabase.from('profiles').upsert({
                 id: user?.id as string,
                 full_name: fullname,
                 username,
@@ -66,7 +68,7 @@ export default function AccountForm({ user }: { user: User | null }) {
                 updated_at: new Date().toISOString(),
             })
             if (error) throw error
-                alert(`Profile updated: ${error}`);
+            alert(`Profile updated: ${error}`);
         } catch (error) {
             alert(`Error updating the data: ${error}`);
         } finally {
