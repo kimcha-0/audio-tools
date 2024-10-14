@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { TopNav } from "@/app/ui/topnav";
+import { LandingPageTopNav } from "@/app/ui/landing-page-topnav";
+import { createClient } from "@/app/lib/supabase/server";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,7 +31,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <TopNav />
+      <LandingPageTopNav />
         {children}
       </body>
     </html>
