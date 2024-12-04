@@ -23,7 +23,7 @@ export async function login(formData: FormData) {
     }
 
     revalidatePath('/', 'layout')
-    redirect('/tools')
+    redirect('/')
 }
 
 export async function signup(formData: FormData) {
@@ -50,4 +50,13 @@ export async function signup(formData: FormData) {
 export async function signout() {
     const supabase = createClient();
     const { error } = await supabase.auth.signOut();
+}
+
+export const validateUser = async () => {
+    const supabase = createClient();
+    const { data, error } = await supabase.auth.getUser();
+    if (!data?.user || error) {
+        alert('not authenticated');
+
+    }
 }

@@ -6,6 +6,7 @@ export default async function ToolPage() {
 
     const { data, error } = await supabase.auth.getUser();
     if (error || !data?.user) {
+        console.log('unauthorized user');
         redirect('/login')
     }
     return (
